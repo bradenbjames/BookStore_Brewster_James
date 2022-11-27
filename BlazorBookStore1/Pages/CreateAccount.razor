@@ -1,0 +1,41 @@
+﻿@page "/createaccount"
+<h3>CreateAccount</h3>
+<form>
+	<table>
+		<tr>
+			<td>
+				Email Address:
+			</td>
+
+			<td>
+				<input placeholder=Email name=””>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Password:
+			</td>
+			<td>
+				<input placeholder=Password name=””>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Administrator?:
+			</td>
+			<td>
+				<label class="switch">
+					<input type="checkbox">
+					<span class="slider round"></span>
+				</label>
+			</td>
+		</tr>
+		<button class="btn btn-primary" @onclick="createAccount">Create Account</button>
+	</table>
+</form>
+
+@code {
+	private void createAccount() {
+		
+	}
+}
