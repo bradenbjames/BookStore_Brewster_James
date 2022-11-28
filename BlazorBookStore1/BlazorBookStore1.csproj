@@ -55,6 +55,7 @@
 
     <ItemGroup>
       <Folder Include="bin\" />
+      <Folder Include="Controllers\" />
     </ItemGroup>
 
 </Project>

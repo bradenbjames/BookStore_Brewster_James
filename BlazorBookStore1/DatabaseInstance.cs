@@ -149,6 +149,29 @@ namespace BlazorBookStore1
             }
             return orders;
         }
+        public static List<Order> viewBooks()
+        {
+            List<Order> orders = new List<Order>();
+            string query = $"SELECT * FROM dbo.Orders";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int orderID = reader.GetInt32(reader.GetOrdinal("orderID"));
+                        string orderDate = reader.GetString(reader.GetOrdinal("orderDate"));
+                        float orderVal = reader.GetFloat(reader.GetOrdinal("orderVal"));
+                        int customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
 
+                        Order newOrder = new Order(orderID, orderDate, orderVal, customerID);
+                        orders.Add(newOrder);
+                    }
+                }
+            }
+            return orders;
+        }
     }
 }
