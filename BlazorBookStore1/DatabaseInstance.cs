@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using BlazorBookStore1.Pages;
 
 namespace BlazorBookStore1
 {
@@ -50,6 +51,7 @@ namespace BlazorBookStore1
             string query = $"SELECT * FROM dbo.Login WHERE email='{email}' AND password='{password}'";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
+                conn.Open();
                 SqlCommand command = new SqlCommand(query, conn);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -95,5 +97,58 @@ namespace BlazorBookStore1
         {
             Customer.customerID = -1;
         }
+
+        public static List<Customers> viewCustomers()
+        {
+            List<Customers> customers = new List<Customers>();
+            string query = $"SELECT * FROM dbo.Customer JOIN dbo.CustomerContactDetails ON dbo.Customer.customerID = dbo.CustomerContactDetails.customerID";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                        string fName = reader.GetString(reader.GetOrdinal("fName"));
+                        string lName = reader.GetString(reader.GetOrdinal("lName"));
+                        string email = reader.GetString(reader.GetOrdinal("email"));
+                        int phone = reader.GetInt32(reader.GetOrdinal("phone"));
+                        string address = reader.GetString(reader.GetOrdinal("address"));
+
+                        Customers newCustomer = new Customers(customerID, fName, lName, email, phone, address);
+                        customers.Add(newCustomer);
+                    }
+                }
+            }
+            return customers;
+        }
+
+        public static List<Order> viewOrders()
+        {
+            List<Order> orders = new List<Order>();
+            string query = $"SELECT * FROM dbo.Orders";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int orderID = reader.GetInt32(reader.GetOrdinal("orderID"));
+                        string orderDate = reader.GetString(reader.GetOrdinal("orderDate"));
+                        float orderVal = reader.GetFloat(reader.GetOrdinal("orderVal"));
+                        int customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
+
+                        Order newOrder = new Order(orderID, orderDate, orderVal, customerID);
+                        orders.Add(newOrder);
+                    }
+                }
+            }
+            return orders;
+        }
+
     }
 }
