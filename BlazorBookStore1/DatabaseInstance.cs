@@ -51,10 +51,15 @@ namespace BlazorBookStore1
                 {
                     while (reader.Read())
                     {
-
+                        Customer.customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
                     }
                 }
             }
+        }
+
+        public static void Logout()
+        {
+            Customer.customerID = -1;
         }
     }
 }
