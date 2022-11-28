@@ -43,6 +43,7 @@ namespace BlazorBookStore1
 
         public static void Login(string email, string password)
         {
+            int customerID = -1;
             string query = $"SELECT * FROM dbo.Login WHERE email='{email}' AND password='{password}'";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -52,6 +53,36 @@ namespace BlazorBookStore1
                     while (reader.Read())
                     {
                         Customer.customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                        Customer.email = reader.GetString(reader.GetOrdinal("email"));
+                        Customer.password = reader.GetString(reader.GetOrdinal("password"));
+                        int isAdministrator = reader.GetInt32(reader.GetOrdinal("isAdministrator"));
+                        if (isAdministrator == 1)
+                            Customer.isAdministrator = true;
+                        else
+                            Customer.isAdministrator = false;
+                        break;
+                    }
+                }
+                query = $"SELECT * FROM dbo.Customer WHERE customerID={customerID}";
+                command = new SqlCommand(query, conn);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Customer.fName = reader.GetString(reader.GetOrdinal("fName"));
+                        Customer.lName = reader.GetString(reader.GetOrdinal("lName"));
+                        break;
+                    }
+                }
+
+                query = $"SELECT * FROM dbo.CustomerContactDetails WHERE customerID={customerID}";
+                command = new SqlCommand(query, conn);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Customer.address = reader.GetString(reader.GetOrdinal("address"));
+                        Customer.phone = reader.GetInt32(reader.GetOrdinal("phone"));
                     }
                 }
             }
