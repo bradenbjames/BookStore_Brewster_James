@@ -13,58 +13,58 @@
 							<p class="text-white-50 mb-5"></p>
 
 							<div class="form-outline form-white mb-4">
-								<input type="email" id="firstName" class="form-control form-control-lg" />
-								<label class="form-label" for="typeEmailX">First Name:</label>
+								<input type="text" id="firstName" class="form-control form-control-lg" @onchange="Eval_fName" />
+								<label class="form-label" for="firstName">First Name:</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="text" id="lastName" class="form-control form-control-lg" />
-								<label class="form-label" for="typePasswordX">Last Name</label>
+								<input type="text" id="lastName" class="form-control form-control-lg" @onchange="Eval_lName" />
+								<label class="form-label" for="lastName">Last Name</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="email" id="typeEmailX" class="form-control form-control-lg" />
-								<label class="form-label" for="typeEmailX">Address Line 1</label>
+								<input type="text" id="addressOne" class="form-control form-control-lg" @onchange="Eval_address"/>
+								<label class="form-label" for="addressOne">Address Line 1</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="email" id="typeEmailX" class="form-control form-control-lg" />
-								<label class="form-label" for="typeEmailX">Address Line 2</label>
+								<input type="text" id="addressTwo" class="form-control form-control-lg" />
+								<label class="form-label" for="addressTwo">Address Line 2</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="email" id="typeEmailX" class="form-control form-control-lg" />
-								<label class="form-label" for="typeEmailX">City</label>
+								<input type="text" id="city" class="form-control form-control-lg" />
+								<label class="form-label" for="city">City</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="email" id="typeEmailX" class="form-control form-control-lg" />
-								<label class="form-label" for="typeEmailX">ZipCode</label>
+								<input type="text" id="zipCode" class="form-control form-control-lg" />
+								<label class="form-label" for="zipCode">ZipCode</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="email" id="typeEmailX" class="form-control form-control-lg" />
-								<label class="form-label" for="typeEmailX">State</label>
+								<input type="text" id="state" class="form-control form-control-lg" />
+								<label class="form-label" for="state">State</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="email" id="typeEmailX" class="form-control form-control-lg" />
-								<label class="form-label" for="typeEmailX">Phone Number</label>
+								<input type="text" id="phoneNum" class="form-control form-control-lg" @onchange="Eval_phone"/>
+								<label class="form-label" for="phoneNum">Phone Number</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="email" id="typeEmailX" class="form-control form-control-lg" />
+								<input type="email" id="typeEmailX" class="form-control form-control-lg" @onchange="Eval_email"/>
 								<label class="form-label" for="typeEmailX">Email</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="password" id="typeEmailX" class="form-control form-control-lg" />
-								<label class="form-label" for="typeEmailX">Password</label>
+								<input type="password" id="password" class="form-control form-control-lg" @onchange="Eval_password"/>
+								<label class="form-label" for="password">Password</label>
 							</div>
 
 							<div class="form-outline form-white mb-4">
-								<input type="checkbox" id="adminCheckbox" @onchange="Eval_admin" class="form-control form-control-lg" />
-								<label class="form-label" for="typeEmailX">Administrator?:</label>
+								<input type="checkbox" id="adminCheckbox" @onchange="Eval_admin"/>
+								<label class="form-label" for="adminCheckbox">Administrator?:</label>
 							</div>
 
 							<p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
@@ -121,10 +121,10 @@
 		addressString = (string)x.Value;
 	}
 
-	private int phone { get; set; }
+	private long phone { get; set; }
 	private void Eval_phone(ChangeEventArgs x)
 	{
-		phone = (int)x.Value;
+		phone = long.Parse((string)x.Value);
 	}
 
 }

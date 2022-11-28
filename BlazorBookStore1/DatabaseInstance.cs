@@ -12,7 +12,7 @@ namespace BlazorBookStore1
     {
         private static string connectionString = @"Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\Legen\Source\Repos\BookStore_Brewster_James\BlazorBookStore1\Resources\BookStoreDB.mdf;";
 
-        public static void CreateAccount(string fName, string lName, string email, string password, bool isAdministrator, string address, int phone)
+        public static void CreateAccount(string fName, string lName, string email, string password, bool isAdministrator, string address, long phone)
         {
             int adminPrivileges = 0;
             if (isAdministrator)
