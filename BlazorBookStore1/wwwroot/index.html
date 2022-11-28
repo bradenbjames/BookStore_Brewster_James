@@ -23,7 +23,16 @@
 	</div>
 
 	<script src="_framework/blazor.webview.js" autostart="false"></script>
-
+	<script>
+		function elementId() {
+			// Get element with the specified ID name
+			var idValue = document.getElementById("typeEmailX");
+			console.log(idValue.innerHTML);
+			// Get element with the specified Class name
+			var classValue = document.getElementsByClassName("typePasswordX");
+			console.log(classValue[0].innerHTML);
+		}
+	</script>
 </body>
 
 </html>
