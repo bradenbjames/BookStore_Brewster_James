@@ -1,0 +1,36 @@
+﻿@page "/viewbooks"
+<div>
+	<h3>Book Browser</h3>
+	<input type="search" id="query" name="q" placeholder="Search...">
+	<button>Search</button>
+</div>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Publication</th>
+			<th>Category</th>
+			<th>Reviews</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<button class="btn btn-primary" @onclick="updateBook">Delete Book</button>
+<button class="btn btn-primary" @onclick="editBook">Edit Book</button>
+
+
+@code {
+	private void updateBook() {
+
+	}
+	private void editBook() { 
+	}
+}
