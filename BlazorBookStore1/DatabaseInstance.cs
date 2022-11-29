@@ -321,6 +321,8 @@ namespace BlazorBookStore1
             return author;
         }
 
+        public static void editAuthor()
+
         public static Supplier getSupplier(int supplierID)
         {
             Supplier supplier = null;
@@ -340,6 +342,17 @@ namespace BlazorBookStore1
                 }
             }
             return supplier;
+        }
+
+        public static void editSupplier(int supplierID, string name)
+        {
+            string query = $"UPDATE dbo.Supplier VALUES('{name}') WHERE supplierID={supplierID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
         }
     }
 }
