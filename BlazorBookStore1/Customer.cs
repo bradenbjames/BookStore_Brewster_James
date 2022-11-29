@@ -15,8 +15,6 @@ namespace BlazorBookStore1
         public static string email { get; set; }
         public static int phone { get; set; }   
         public static string address { get; set; }
-        public static bool isAdministrator { get; set; }
-
-        //yolo
+        public static bool isAdministrator { get; set; } = false;
     }
 }
