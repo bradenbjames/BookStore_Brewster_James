@@ -1,12 +1,9 @@
 ﻿@page "/Admineditsupplier/{supplierID:int}"
 <h2>Admin Delete Supplier</h2>
-<table class="table">
+<table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Supplier Name</th>
-			<th>Last Name</th>
-			<th>Gender</th>
-			<th>DOB</th>
+			<th scope="col">Supplier Name</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -19,8 +16,8 @@
 		}
 	</tbody>
 </table>
-<input type="text" placeholder="Enter ISBN#" @onchange="a" id="ISBN#" class="form-control form-control-sm" />
 <button class="btn btn-primary">Confirm Changes</button>
+<button class="btn btn-primary">Delete Supplier</button>
 @code {
 	[Parameter]
 	public int? supplierID { get; set; }

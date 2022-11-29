@@ -5,21 +5,23 @@
 	<button>Search</button>
 </div>
 
-<table class="table">
+<table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Customer ID</th>
-			<th>First Name</th>
-			<th>Last Name</th>
+			<th scope="col">Customer ID</th>
+			<th scope="col">First Name</th>
+			<th scope="col">Last Name</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+		@foreach(CustomerDetails c in DatabaseInstance.viewCustomers()) 
+		{
+			<tr>
+				<td>@c.customerID</td>
+				<td>@c.fName</td>
+				<td>@c.lName</td>
+			</tr>
+		}
 	</tbody>
 </table>
 <input type="text" @onchange="Eval_CustomerID" placeholder="Enter customerID">
