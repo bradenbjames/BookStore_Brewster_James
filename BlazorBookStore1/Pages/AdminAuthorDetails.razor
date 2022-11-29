@@ -8,6 +8,7 @@
 <table class="table">
 	<thead>
 		<tr>
+			<th>AuthorID</th>
 			<th>First Name</th>
 			<th>Last Name</th>
 			<th>Gender</th>
@@ -15,12 +16,16 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+		@foreach (Author a in DatabaseInstance.viewAuthors())
+		{
+			<tr>
+				<td>@a.authorID</td>
+				<td>@a.fName</td>
+				<td>@a.lName</td>
+				<td>@a.gender</td>
+				<td>@a.DOB</td>
+			</tr>
+		}
 	</tbody>
 </table>
 <h3>Edit Author</h3>
@@ -34,7 +39,7 @@
 				<input type="text" placeholder="Enter rowId here" id="DOB" class="form-control form-control-sm" />
 			</td>
 			<td>
-				<button class="btn btn-secondary"><a href="/EditAuthorData" class="text-white-50 fw-bold"> Edit</a></button>
+				<a href="/EditAuthorData"><p class="btn btn-secondary"></p></a>
 			</td>
 		</tr>
 	</tbody>
