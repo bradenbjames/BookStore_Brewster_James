@@ -97,14 +97,19 @@ namespace BlazorBookStore1
             }
         }
 
+        public static void UpdateAccount(int customerID, string fName, string lName, string address, string email, string phone, string password)
+        {
+            string query = $"UPDATE dbo.Customer SET fName='{fName}', lName='{lName}' WHERE ";
+        }
+
         public static void Logout()
         {
             Customer.customerID = -1;
         }
 
-        public static List<Customers> viewCustomers()
+        public static List<CustomerDetails> viewCustomers()
         {
-            List<Customers> customers = new List<Customers>();
+            List<CustomerDetails> customers = new List<CustomerDetails>();
             string query = $"SELECT * FROM dbo.Customer JOIN dbo.CustomerContactDetails ON dbo.Customer.customerID = dbo.CustomerContactDetails.customerID";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -121,7 +126,7 @@ namespace BlazorBookStore1
                         string phone = reader.GetString(reader.GetOrdinal("phone"));
                         string address = reader.GetString(reader.GetOrdinal("address"));
 
-                        Customers newCustomer = new Customers(customerID, fName, lName, email, phone, address);
+                        CustomerDetails newCustomer = new CustomerDetails(customerID, fName, lName, email, phone, address);
                         customers.Add(newCustomer);
                     }
                 }
@@ -129,9 +134,9 @@ namespace BlazorBookStore1
             return customers;
         }
 
-        public static Customers getCustomer(int customerID)
+        public static CustomerDetails getCustomer(int customerID)
         {
-            Customers customer = null;
+            CustomerDetails customer = null;
             string query = $"SELECT * FROM dbo.Customer JOIN dbo.CustomerContactDetails ON dbo.Customer.customerID = dbo.CustomerContactDetails.customerID WHERE customerID={customerID}";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -147,7 +152,7 @@ namespace BlazorBookStore1
                         string phone = reader.GetString(reader.GetOrdinal("phone"));
                         string address = reader.GetString(reader.GetOrdinal("address"));
 
-                        customer = new Customers(customerID, fName, lName, email, phone, address);
+                        customer = new CustomerDetails(customerID, fName, lName, email, phone, address);
                     }
                 }
             }
@@ -439,7 +444,6 @@ namespace BlazorBookStore1
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
-                conn.connection
                 conn.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
