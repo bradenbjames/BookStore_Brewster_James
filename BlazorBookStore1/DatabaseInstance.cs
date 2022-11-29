@@ -8,6 +8,10 @@ using BlazorBookStore1.Pages;
 
 namespace BlazorBookStore1
 {
+    /// <summary>
+    /// TODO: Make queries for searching by book title, etc. Make query to add books to cart. Make query to change order. Make query to place order.
+    /// 
+    /// </summary>
     public static class DatabaseInstance
     {
         private static string connectionString = @"Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\Legen\Source\Repos\BookStore_Brewster_James\BlazorBookStore1\Resources\BookStoreDB.mdf;";
