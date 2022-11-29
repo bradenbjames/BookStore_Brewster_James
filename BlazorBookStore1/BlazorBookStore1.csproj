@@ -50,12 +50,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+      <Folder Include="bin\" />
+      <Folder Include="Controllers\" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="bin\" />
-      <Folder Include="Controllers\" />
+      <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
     </ItemGroup>
 
 </Project>
