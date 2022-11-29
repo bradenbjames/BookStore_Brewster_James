@@ -249,6 +249,17 @@ namespace BlazorBookStore1
             return book;
         }
 
+        public static void editBook(string isbnNum, string title, string pubDate, float price, float reviews, int supplierID)
+        {
+            string query = $"UPDATE dbo.Books VALUES('{isbnNum}', '{title}', '{pubDate}', {price}, {reviews}, {supplierID}) WHERE isbnNum='{isbnNum}'";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
         public static List<Author> viewAuthors()
         {
             List<Author> authors = new List<Author>();
