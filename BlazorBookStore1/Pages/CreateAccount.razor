@@ -121,10 +121,10 @@
 		addressString = (string)x.Value;
 	}
 
-	private long phone { get; set; }
+	private string phone { get; set; }
 	private void Eval_phone(ChangeEventArgs x)
 	{
-		phone = long.Parse((string)x.Value);
+		phone = (string)x.Value;
 	}
 
 }

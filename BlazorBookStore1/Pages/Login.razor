@@ -1,4 +1,5 @@
 ﻿@page "/login"
+@inject NavigationManager UriHelper
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -44,6 +45,16 @@
     </div>
 </section>
 @code {
+    private void RedirectLogin()
+    {
+        try
+        {
+            DatabaseInstance.Login(emailString, passwordString);
+            UriHelper.NavigateTo("profile");
+        }
+        catch (Exception e) { }
+    }
+
     private string emailString { get; set; }
     private void Eval_email(ChangeEventArgs x) {
         emailString = (string)x.Value;
