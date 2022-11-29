@@ -16,7 +16,7 @@ namespace BlazorBookStore1
     {
         private static string connectionString = @"Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\Legen\Source\Repos\BookStore_Brewster_James\BlazorBookStore1\Resources\BookStoreDB.mdf;Connection Lifetime=120;";
 
-        public static void CreateAccount(string fName, string lName, string email, string password, bool isAdministrator, string address, long phone)
+        public static void CreateAccount(string fName, string lName, string email, string password, bool isAdministrator, string address, string phone)
         {
             int adminPrivileges = 0;
             if (isAdministrator)
@@ -43,7 +43,7 @@ namespace BlazorBookStore1
                 query = $"INSERT INTO dbo.Login VALUES ({customerID}, '{email}', '{password}', {adminPrivileges})";
                 command = new SqlCommand(query, conn);
                 command.ExecuteNonQuery();
-                query = $"INSERT INTO dbo.CustomerContactDetails VALUES ({customerID}, '{address}', '{email}', {phone})";
+                query = $"INSERT INTO dbo.CustomerContactDetails VALUES ({customerID}, '{address}', '{email}', '{phone}')";
                 command = new SqlCommand(query, conn);
                 command.ExecuteNonQuery();
             }
