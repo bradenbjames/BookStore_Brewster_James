@@ -1,4 +1,4 @@
-﻿@page "/Adminchangecustomers"
+﻿@page "/Admineditcustomer/{customerID:int}"
 <div>
 	<h3>Edit Customer Details</h3>
 	<input type="search" id="query" name="q" placeholder="Search...">
@@ -16,20 +16,18 @@
 		@foreach(Customers c in DatabaseInstance.viewCustomers())
 		{
 			<tr>
-				<td>@c.fName</td>
-				<td>@c.lName</td>
+				<td><input value=@c.fName type="text"></td>
+				<td><input value=@c.lName type="text"></td>
 			</tr>
 		}
 	</tbody>
 </table>
-<input type="text" @onchange="Eval_CustomerID" placeholder="Enter customerID"></input>
-<button class="btn btn-primary">Edit Customer</button>
+<input type="text" placeholder="Edit First Name">
+<input type="text" placeholder="Edit Last Name">
+<button class="btn btn-primary">Confirm Changes</button>
 
 
 @code {
-	private int customerID;
-	private void Eval_CustomerID(ChangeEventArgs e)
-	{
-		customerID = Int32.Parse((string)e.Value);
-	}
+	[Parameter]
+	public int? customerID { get; set; }
 }

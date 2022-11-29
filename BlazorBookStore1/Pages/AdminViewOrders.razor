@@ -1,4 +1,4 @@
-﻿@page "/Adminorders"
+﻿@page "/Adminvieworders"
 <h3>Orders</h3>
 <div>
 	<input type="search" id="query" name="q" placeholder="Search...">
@@ -15,16 +15,19 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>a</td>
-			<td>b</td>
-			<td>c</td>
-			<td>d</td>
-		</tr>
+		@foreach(Order o in DatabaseInstance.viewOrders())
+		{
+			<tr>
+				<td>@o.orderID</td>
+				<td>@o.orderDate</td>
+				<td>TBD</td>
+				<td>@o.customerID</td>
+			</tr>
+		}
 	</tbody>
 </table>
 <input type="text" placeholder="Enter rowId here" @onchange="Eval_OrderID" id="DOB" class="form-control form-control-sm" />
-<button class="btn btn-primary"><a href="/Admineditorder" class="text-white-50 fw-bold"> Edit Order</a></button>
+<button class="btn btn-primary" href="/Admineditorder"></button>
 
 @code {
 	private int orderID;
