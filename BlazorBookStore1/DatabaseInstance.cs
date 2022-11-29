@@ -99,7 +99,19 @@ namespace BlazorBookStore1
 
         public static void UpdateAccount(int customerID, string fName, string lName, string address, string email, string phone, string password)
         {
-            string query = $"UPDATE dbo.Customer SET fName='{fName}', lName='{lName}' WHERE ";
+            string query = $"UPDATE dbo.Customer SET fName='{fName}', lName='{lName}' WHERE customerID={customerID}";
+            string query2 = $"UPDATE dbo.CustomerContactDetails SET address='{address}', email='{email}', phone='{phone}' WHERE customerID={customerID}";
+            string query3 = $"UPDATE dbo.Login SET email='{email}', password='{password}' WHERE customerID={customerID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command1 = new SqlCommand(query, conn);
+                SqlCommand command2 = new SqlCommand(query2, conn);
+                SqlCommand command3 = new SqlCommand(query3, conn);
+
+                command1.ExecuteNonQuery();
+                command2.ExecuteNonQuery();
+                command3.ExecuteNonQuery();
+            }
         }
 
         public static void Logout()
