@@ -1,4 +1,4 @@
-﻿@page "/EditAuthorData/{AuthorID:int}" 
+﻿@page "/Admineditauthordata/{AuthorID:int}" 
 <h2>Edit Author Data</h2>
 <table class="table table-striped">
 	<thead>
@@ -13,12 +13,15 @@
 
 		@foreach (Author a in DatabaseInstance.viewAuthors())
 		{
-			<tr>
-				<td> <input value=@a.fName type="text"></td>
-				<td> <input value=@a.lName type="text"></td>
-				<td> <input value=@a.gender type="text"></td>
-				<td> <input value=@a.DOB type="text"></td>
-			</tr>
+			if (a.authorID == AuthorID)
+			{
+				<tr>
+					<td> <input value=@a.fName type="text"></td>
+					<td> <input value=@a.lName type="text"></td>
+					<td> <input value=@a.gender type="text"></td>
+					<td> <input value=@a.DOB type="text"></td>
+				</tr>
+			}
 		}
 	</tbody>
 </table>

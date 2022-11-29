@@ -29,24 +29,8 @@
 	</tbody>
 </table>
 <h3>Edit Author</h3>
-<br />
-<table class="table">
-	<thead>
-	</thead>
-	<tbody>
-		<tr>
-			<td>
-				<input type="text" @onchange="Eval_AuthorID" placeholder="Enter AuthorID here" id="DOB" class="form-control form-control-sm" />
-			</td>
-			<td>
-				<a href="/EditAuthorData/{@authorID}"><p class="btn btn-secondary"></p></a>
-			</td>
-		</tr>
-	</tbody>
-</table>
-
-
-
+<input type="text" @onchange="Eval_AuthorID" placeholder="Enter AuthorID here" id="textAuthorID"/>
+<a href="/Admineditauthordata/{@authorID}"><p class="btn btn-primary">Edit Author</p></a>
 @code {
 	private int authorID;
 	private void Eval_AuthorID(ChangeEventArgs e) {
