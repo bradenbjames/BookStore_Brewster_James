@@ -174,6 +174,29 @@ namespace BlazorBookStore1
             }
             return orders;
         }
+
+        public static Order getOrder(int orderID)
+        {
+            Order order = null;
+            string query = $"SELECT * FROM dbo.Orders WHERE orderID={orderID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string orderDate = reader.GetString(reader.GetOrdinal("orderDate"));
+                        float orderVal = reader.GetFloat(reader.GetOrdinal("orderVal"));
+                        int customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
+
+                        order = new Order(orderID, orderDate, orderVal, customerID);
+                    }
+                }
+            }
+            return order;
+        }
         public static List<Book> viewBooks()
         {
             List<Book> books = new List<Book>();
@@ -274,10 +297,10 @@ namespace BlazorBookStore1
             return suppliers;
         }
 
-        public static Author getAuthor(int authorID)
+        public static Authors getAuthor(int authorID)
         {
-            Author author = null;
-            string query = $"SELECT * FROM dbo.Author WHERE authorID={authorID}";
+            Authors author = null;
+            string query = $"SELECT * FROM dbo.Author JOIN dbo.AuthorContactDetails ON dbo.Author.authorID=dbo.AuthorContactDetails.authorID WHERE authorID={authorID}";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
@@ -290,7 +313,8 @@ namespace BlazorBookStore1
                         string lName = reader.GetString(reader.GetOrdinal("lName"));
                         string gender = reader.GetString(reader.GetOrdinal("gender"));
                         string DOB = reader.GetString(reader.GetOrdinal("DOB"));
-                        author = new Author(authorID, fName, lName, gender, DOB);
+
+                        author = new Authors(authorID, fName, lName, gender, DOB);
                     }
                 }
             }
