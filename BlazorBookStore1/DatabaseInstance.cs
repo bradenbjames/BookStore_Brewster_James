@@ -125,6 +125,31 @@ namespace BlazorBookStore1
             return customers;
         }
 
+        public static Customers getCustomer(int customerID)
+        {
+            Customers customer = null;
+            string query = $"SELECT * FROM dbo.Customer JOIN dbo.CustomerContactDetails ON dbo.Customer.customerID = dbo.CustomerContactDetails.customerID WHERE customerID={customerID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string fName = reader.GetString(reader.GetOrdinal("fName"));
+                        string lName = reader.GetString(reader.GetOrdinal("lName"));
+                        string email = reader.GetString(reader.GetOrdinal("email"));
+                        int phone = reader.GetInt32(reader.GetOrdinal("phone"));
+                        string address = reader.GetString(reader.GetOrdinal("address"));
+
+                        customer = new Customers(customerID, fName, lName, email, phone, address);
+                    }
+                }
+            }
+            return customer;
+        }
+
         public static List<Order> viewOrders()
         {
             List<Order> orders = new List<Order>();
