@@ -6,23 +6,31 @@
 </div>
 
 <table class="table">
-		<thead>
+	<thead>
+		<tr>
+			<th>ISBN</th>
+			<th>Title</th>
+			<th>Date Published</th>
+			<th>Price</th>
+			<th>Reviews</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (Book b in DatabaseInstance.viewBooks())
+		{
 			<tr>
-				<th>Title</th>
-				<th>Publication</th>
-				<th>Category</th>
-				<th>Reviews</th>
+				<td>@b.isbnNum</td>
+				<td>@b.title</td>
+				<td>@b.pubDate</td>
+				<td>@b.price</td>
+				<td>@b.reviews</td>
 			</tr>
-		</thead>
-		<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-		</tbody>
-	</table>
+		}
+	</tbody>
+</table>
+<input type="text" placeholder="Enter ISBN# Here" id="DOB" class="form-control form-control-sm" />
+<button class="btn btn-primary"><a href="/Customereditorder" class="text-white-50 fw-bold"> Add to Order</a></button>
 
 @code {
 	private void orderBook() { 

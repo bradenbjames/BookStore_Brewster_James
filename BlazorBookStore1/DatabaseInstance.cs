@@ -176,6 +176,31 @@ namespace BlazorBookStore1
             return books;
         }
 
+        public static Book getBook(string isbnNum)
+        {
+            Book book = null;
+            string query = $"SELECT * FROM dbo.Books WHERE isbnNum='{isbnNum}'";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string title = reader.GetString(reader.GetOrdinal("title"));
+                        string pubDate = reader.GetString(reader.GetOrdinal("pubDate"));
+                        float price = reader.GetFloat(reader.GetOrdinal("price"));
+                        float reviews = reader.GetFloat(reader.GetOrdinal("reviews"));
+                        int supplierID = reader.GetInt32(reader.GetOrdinal("supplierID"));
+
+                        book = new Book(isbnNum, title, pubDate, price, reviews, supplierID);
+                    }
+                }
+            }
+            return book;
+        }
+
         public static List<Author> viewAuthors()
         {
             List<Author> authors = new List<Author>();
@@ -201,7 +226,71 @@ namespace BlazorBookStore1
             }
             return authors;
         }
-        //
+        public static List<Supplier> viewSuppliers()
+        {
+            List<Supplier> suppliers = new List<Supplier>();
+            string query = $"SELECT * FROM dbo.Supplier";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int supplierID = reader.GetInt32(reader.GetOrdinal("supplierID"));
+                        string name = reader.GetString(reader.GetOrdinal("name"));
 
+                        Supplier newSupplier = new Supplier(supplierID, name);
+                        suppliers.Add(newSupplier);
+                    }
+                }
+            }
+            return suppliers;
+        }
+
+        public static Author getAuthor(int authorID)
+        {
+            Author author = null;
+            string query = $"SELECT * FROM dbo.Author WHERE authorID={authorID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string fName = reader.GetString(reader.GetOrdinal("fName"));
+                        string lName = reader.GetString(reader.GetOrdinal("lName"));
+                        string gender = reader.GetString(reader.GetOrdinal("gender"));
+                        string DOB = reader.GetString(reader.GetOrdinal("DOB"));
+                        author = new Author(authorID, fName, lName, gender, DOB);
+                    }
+                }
+            }
+            return author;
+        }
+
+        public static Supplier getSupplier(int supplierID)
+        {
+            Supplier supplier = null;
+            string query = $"SELECT * FROM dbo.Supplier WHERE supplierID={supplierID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string name = reader.GetString(reader.GetOrdinal("name"));
+
+                        supplier = new Supplier(supplierID, name);
+                    }
+                }
+            }
+            return supplier;
+        }
     }
 }

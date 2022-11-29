@@ -1,0 +1,29 @@
+﻿@page "/EditAuthorData/{AuthorID:int}" 
+<h2>Edit Author Data</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Gender</th>
+			<th>DOB</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (Author a in DatabaseInstance.viewAuthors())
+		{
+			<tr>
+				<td> <input value=@a.fName type="text"></td>
+				<td> <input value=@a.lName type="text"></td>
+				<td> <input value=@a.gender type="text"></td>
+				<td> <input value=@a.DOB type="text"></td>
+			</tr>
+		}
+	</tbody>
+</table>
+@code {
+	[Parameter]
+	public int? AuthorID {get; set;}
+	Author a = DatabaseInstance.get;
+}
