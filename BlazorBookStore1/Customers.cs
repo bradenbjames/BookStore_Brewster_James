@@ -12,10 +12,10 @@ namespace BlazorBookStore1
         public string fName { get; set; }
         public string lName { get; set; }
         public string email { get; set; }
-        public int phone { get; set; }
+        public long phone { get; set; }
         public string address { get; set; }
 
-        public Customers(int customerID, string fName, string lName, string email, int phone, string address)
+        public Customers(int customerID, string fName, string lName, string email, long phone, string address)
         {
             this.customerID = customerID;
             this.fName = fName;

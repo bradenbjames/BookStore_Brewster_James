@@ -140,7 +140,7 @@ namespace BlazorBookStore1
                         string fName = reader.GetString(reader.GetOrdinal("fName"));
                         string lName = reader.GetString(reader.GetOrdinal("lName"));
                         string email = reader.GetString(reader.GetOrdinal("email"));
-                        int phone = reader.GetInt32(reader.GetOrdinal("phone"));
+                        long phone = reader.GetLong(reader.GetOrdinal("phone"));
                         string address = reader.GetString(reader.GetOrdinal("address"));
 
                         customer = new Customers(customerID, fName, lName, email, phone, address);
@@ -148,6 +148,20 @@ namespace BlazorBookStore1
                 }
             }
             return customer;
+        }
+
+        public static void editCustomer(int customerID, string fName, string lName, string email, long phone, string address)
+        {
+            string query = $"UPDATE dbo.Customer SET fName='{fName}', lName='{lName}' WHERE customerID={customerID}";
+            string query2 = $"UPDATE dbo.CustomerContactDetails SET email='{email}', phone={phone}, address='{address}' WHERE customerID={customerID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                SqlCommand command2 = new SqlCommand(query, conn);
+                conn.Open();
+                command.ExecuteNonQuery();
+                command2.ExecuteNonQuery();
+            }
         }
 
         public static List<Order> viewOrders()
