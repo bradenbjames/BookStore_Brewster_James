@@ -20,8 +20,6 @@
 			<td></td>
 			<td></td>
 			<td></td>
-			<td><button class="btn btn-secondary" @onclick="delete">Delete Author</button></td>
-			<td><button class="btn btn-secondary" @onclick="editAuthor">Edit Author</button></td>
 		</tr>
 	</tbody>
 </table>
@@ -29,29 +27,14 @@
 <br />
 <table class="table">
 	<thead>
-		<tr>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Gender</th>
-			<th>DOB</th>
-		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td>
-				<input type="text" id="FirstName" class="form-control form-control-lg" />
+				<input type="text" placeholder="Enter rowId here" id="DOB" class="form-control form-control-sm" />
 			</td>
 			<td>
-				<input type="text" id="LastName" class="form-control form-control-lg" />
-			</td>
-			<td>
-				<input type="text" id="Gender" class="form-control form-control-lg" />
-			</td>
-			<td>
-				<input type="text" id="DOB" class="form-control form-control-lg" />
-			</td>
-			<td>
-				<button class="btn btn-primary">Confirm Changes</button>
+				<button class="btn btn-secondary" href="EditAuthorData">Edit</button>
 			</td>
 		</tr>
 	</tbody>
