@@ -197,6 +197,17 @@ namespace BlazorBookStore1
             }
             return order;
         }
+
+        public static void editOrder(int orderID, string orderDate, float orderVal, int customerID)
+        {
+            string query = $"UPDATE dbo.Orders SET orderDate='{orderDate}', orderVal={orderVal}, customerID={customerID} WHERE orderID={orderID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                command.ExecuteNonQuery();
+            }
+        }
         public static List<Book> viewBooks()
         {
             List<Book> books = new List<Book>();
@@ -251,7 +262,7 @@ namespace BlazorBookStore1
 
         public static void editBook(string isbnNum, string title, string pubDate, float price, float reviews, int supplierID)
         {
-            string query = $"UPDATE dbo.Books VALUES('{isbnNum}', '{title}', '{pubDate}', {price}, {reviews}, {supplierID}) WHERE isbnNum='{isbnNum}'";
+            string query = $"UPDATE dbo.Books SET isbnNum='{isbnNum}', title='{title}', pubDate='{pubDate}', price={price}, reviews={reviews}, supplierID={supplierID} WHERE isbnNum='{isbnNum}'";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
@@ -357,7 +368,7 @@ namespace BlazorBookStore1
 
         public static void editSupplier(int supplierID, string name)
         {
-            string query = $"UPDATE dbo.Supplier VALUES('{name}') WHERE supplierID={supplierID}";
+            string query = $"UPDATE dbo.Supplier SET name='{name}' WHERE supplierID={supplierID}";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
