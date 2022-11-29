@@ -2,11 +2,16 @@
 <div>
     <h3>Book Browser</h3>
     <input type="search" id="query" name="q" placeholder="Search...">
-	<select name=" optionlist " onChange="combo(this, 'search')">
-		<option>Title</option>
-		<option>Date Published</option>
-		<option>Category</option>
-	</select>
+	<div class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Search Options
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="#">Book Title</a>
+			<a class="dropdown-item" href="#">Date Published</a>
+			<a class="dropdown-item" href="#">Cetegory</a>
+		</div>
+	</div>
     <button>Search</button>
 </div>
 
