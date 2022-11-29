@@ -1,0 +1,33 @@
+﻿@page "/Adminviewsuppliers"
+<div>
+	<h3>Suppliers</h3>
+	<input type="search" id="query" name="q" placeholder="Search...">
+	<button>Search</button>
+</div>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Supplier Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<input type="text" @onchange="Eval_supplierID" placeholder="Enter supplier ID"></input>
+<button class="btn btn-primary">Delete Supplier</button>
+
+
+@code {
+	private int supplierID;
+	private void Eval_supplierID(ChangeEventArgs e)
+	{
+		supplierID = Int32.Parse((string)e.Value);
+	}
+}

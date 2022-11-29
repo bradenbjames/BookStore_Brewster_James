@@ -8,7 +8,6 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>ISBN</th>
 			<th>Title</th>
 			<th>Date Published</th>
 			<th>Price</th>
@@ -21,7 +20,6 @@
 		@foreach (Book b in DatabaseInstance.viewBooks())
 		{
 			<tr>
-				<td>@b.isbnNum</td>
 				<td>@b.title</td>
 				<td>@b.pubDate</td>
 				<td>@b.price</td>
@@ -32,13 +30,14 @@
 
 	</tbody>
 </table>
-<input type="text" placeholder="Enter ISBN#" id="DOB" class="form-control form-control-sm" />
-<button class="btn btn-primary" @onclick="orderBook">Update Book Details</button>
+<input type="text" placeholder="Enter ISBN#" @onchange="Eval_ISBN" id="DOB" class="form-control form-control-sm" />
+<button class="btn btn-primary">Update Book Details</button>
 
 @code {
-	private void orderBook()
+	private string ISBN;
+	private void Eval_ISBN(ChangeEventArgs e)
 	{
-
+		ISBN = (string)e.Value;
 	}
 }
 

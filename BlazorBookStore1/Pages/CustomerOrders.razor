@@ -3,32 +3,28 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Gender</th>
-			<th>DOB</th>
+			<th>Order Date</th>
+			<th>Cost</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>
-				
-			</td>
-			<td>
-				
-			</td>
-			<td>
-				
-			</td>
-			<td>
-				
-			</td>
-		</tr>
+		@foreach(Order o in DatabaseInstance.viewOrders())
+		{
+			<tr>
+				<td>@o.orderDate</td>
+				<td>@o.orderVal</td>
+				<td></td>
+			</tr>
+		}
 	</tbody>
 </table>
 <label>Order ID:</label>
-<input type="text" id="DOB" class="form-control form-control-sm" />
+<input type="text" id="DOB" @onchange="Eval_customerID" class="form-control form-control-sm" />
 <button class="btn btn-secondary"><a href="/Customereditorder" class="text-white-50 fw-bold">Edit Order</a></button>
 @code {
-
+	private int customerID;
+	private void Eval_customerID(ChangeEventArgs e)
+	{
+		customerID = Int32.Parse((string)e.Value);
+	}
 }

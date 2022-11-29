@@ -1,0 +1,31 @@
+﻿@page "/EditAuthorData/{ISBN:int}"
+<h2>Edit Book</h2>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Date Published</th>
+			<th>Price</th>
+			<th>Reviews</th>
+			<th>SupplierID</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (Book b in DatabaseInstance.viewBooks())
+		{
+			<tr>
+				<td> <input value=@b.title type="text"></td>
+				<td> <input value=@b.pubDate type="text"></td>
+				<td> <input value=@b.price type="text"></td>
+				<td> <input value=@b.reviews type="text"></td>
+				<td> <input value=@b.supplierID type="text"></td>
+			</tr>
+		}
+	</tbody>
+</table>
+<button class="btn btn-primary">Confirm Changes</button>
+@code {
+	[Parameter]
+	public int? ISBN { get; set; }
+}

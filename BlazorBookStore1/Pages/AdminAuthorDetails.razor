@@ -36,10 +36,10 @@
 	<tbody>
 		<tr>
 			<td>
-				<input type="text" placeholder="Enter rowId here" id="DOB" class="form-control form-control-sm" />
+				<input type="text" @onchange="Eval_AuthorID" placeholder="Enter AuthorID here" id="DOB" class="form-control form-control-sm" />
 			</td>
 			<td>
-				<a href="/EditAuthorData"><p class="btn btn-secondary"></p></a>
+				<a href="/EditAuthorData/{@authorID}"><p class="btn btn-secondary"></p></a>
 			</td>
 		</tr>
 	</tbody>
@@ -48,11 +48,8 @@
 
 
 @code {
-	private void delete()
-	{
-
-	}
-	private void editAuthor()
-	{
+	private int authorID;
+	private void Eval_AuthorID(ChangeEventArgs e) {
+		authorID = Int32.Parse((string)e.Value);
 	}
 }

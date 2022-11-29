@@ -1,6 +1,6 @@
-﻿@page "/Adminviewcustomers"
+﻿@page "/Adminchangecustomers"
 <div>
-	<h3>Customer Details</h3>
+	<h3>Edit Customer Details</h3>
 	<input type="search" id="query" name="q" placeholder="Search...">
 	<button>Search</button>
 </div>
@@ -8,18 +8,18 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Customer ID</th>
 			<th>First Name</th>
 			<th>Last Name</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+		@foreach(Customers c in DatabaseInstance.viewCustomers())
+		{
+			<tr>
+				<td>@c.fName</td>
+				<td>@c.lName</td>
+			</tr>
+		}
 	</tbody>
 </table>
 <input type="text" @onchange="Eval_CustomerID" placeholder="Enter customerID"></input>
@@ -28,7 +28,7 @@
 
 @code {
 	private int customerID;
-	private void Eval_CustomerID(ChangeEventArgs e) 
+	private void Eval_CustomerID(ChangeEventArgs e)
 	{
 		customerID = Int32.Parse((string)e.Value);
 	}

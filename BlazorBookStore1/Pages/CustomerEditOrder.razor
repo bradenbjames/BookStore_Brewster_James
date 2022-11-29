@@ -1,31 +1,26 @@
-﻿@page "/Customereditorder"
-<h2>Edit Order</h2>
+﻿@page "/Customereditorder/{orderID:int}"
+<h2>Edit Order Data</h2>
 <table class="table">
 	<thead>
 		<tr>
-			<th>OrderID</th>
 			<th>Order Date</th>
 			<th>Order Cost</th>
-
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td>
 
-			</td>
-			<td>
-
-			</td>
-			<td>
-
-			</td>
-		</tr>
+		@foreach (Order o in DatabaseInstance.viewOrders())
+		{
+			<tr>
+				<td> <input value=@o.orderDate type="text"></td>
+				<td> <input value=@o.orderVal type="text"></td>
+			</tr>
+		}
 	</tbody>
 </table>
-<input type="text" id="orderID" class="form-control form-control-sm" />
 <button class="btn btn-primary">Confirm Changes</button>
-
 @code {
-
+	[Parameter]
+	public int? orderID { get; set; }
 }
+

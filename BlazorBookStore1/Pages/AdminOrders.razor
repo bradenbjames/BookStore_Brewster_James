@@ -23,9 +23,13 @@
 		</tr>
 	</tbody>
 </table>
-<input type="text" placeholder="Enter rowId here" id="DOB" class="form-control form-control-sm" />
+<input type="text" placeholder="Enter rowId here" @onchange="Eval_OrderID" id="DOB" class="form-control form-control-sm" />
 <button class="btn btn-primary"><a href="/Admineditorder" class="text-white-50 fw-bold"> Edit Order</a></button>
 
 @code {
-
+	private int orderID;
+	private void Eval_OrderID(ChangeEventArgs e)
+	{
+		orderID = Int32.Parse((string)e.Value);
+	}
 }
