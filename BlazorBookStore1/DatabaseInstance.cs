@@ -376,6 +376,7 @@ namespace BlazorBookStore1
 
         public static Authors getAuthor(int authorID)
         {
+            //create new Authors class with all the properties of Author and AuthorContactDetails
             Authors author = null;
             string query = $"SELECT * FROM dbo.Author JOIN dbo.AuthorContactDetails ON dbo.Author.authorID=dbo.AuthorContactDetails.authorID WHERE authorID={authorID}";
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -399,6 +400,9 @@ namespace BlazorBookStore1
         }
 
         public static void editAuthor()
+        {
+            //finish later and edit Author/AuthorContactDetails
+        }
 
         public static Supplier getSupplier(int supplierID)
         {
@@ -428,6 +432,20 @@ namespace BlazorBookStore1
             {
                 SqlCommand command = new SqlCommand(query, conn);
                 conn.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public static void deleteSupplier(int supplierID)
+        {
+            string query = $"DELETE FROM dbo.Supplier WHERE supplierID={supplierID}";
+            string query2 = $"DELETE FROM dbo.SupplierRep WHERE supplierID={supplierID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                SqlCommand command2 = new SqlCommand(query2, conn);
+                conn.Open();
+                command2.ExecuteNonQuery();
                 command.ExecuteNonQuery();
             }
         }
