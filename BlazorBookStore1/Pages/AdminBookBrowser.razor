@@ -1,6 +1,6 @@
-﻿@page "/Adminorders"
-<h3>Orders</h3>
+﻿@page "/Adminbookbrowser"
 <div>
+	<h3>Book Browser</h3>
 	<input type="search" id="query" name="q" placeholder="Search...">
 	<button>Search</button>
 </div>
@@ -8,24 +8,28 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Order#</th>
-			<th>Order Date</th>
-			<th>Number of Items</th>
-			<th>Customer</th>
+			<th>Title</th>
+			<th>Publication</th>
+			<th>Category</th>
+			<th>Reviews</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td>a</td>
-			<td>b</td>
-			<td>c</td>
-			<td>d</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
 		</tr>
 	</tbody>
 </table>
 <input type="text" placeholder="Enter rowId here" id="DOB" class="form-control form-control-sm" />
-<button class="btn btn-primary">Edit Order</button>
+<button class="btn btn-primary" @onclick="orderBook">Order Book</button>
 
 @code {
+	private void orderBook()
+	{
 
+	}
 }
+
