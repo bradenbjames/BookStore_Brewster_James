@@ -201,7 +201,27 @@ namespace BlazorBookStore1
             }
             return authors;
         }
-        //
+        public static List<Supplier> viewSuppliers()
+        {
+            List<Supplier> suppliers = new List<Supplier>();
+            string query = $"SELECT * FROM dbo.Supplier";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int supplierID = reader.GetInt32(reader.GetOrdinal("supplierID"));
+                        string name = reader.GetString(reader.GetOrdinal("name"));
 
+                        Supplier newSupplier = new Supplier(supplierID, name);
+                        suppliers.Add(newSupplier);
+                    }
+                }
+            }
+            return suppliers;
+        }
     }
 }
