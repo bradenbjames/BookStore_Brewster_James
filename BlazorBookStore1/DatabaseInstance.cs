@@ -14,7 +14,7 @@ namespace BlazorBookStore1
     /// </summary>
     public static class DatabaseInstance
     {
-        private static string connectionString = @"Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\Legen\Source\Repos\BookStore_Brewster_James\BlazorBookStore1\Resources\BookStoreDB.mdf;";
+        private static string connectionString = @"Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\Legen\Source\Repos\BookStore_Brewster_James\BlazorBookStore1\Resources\BookStoreDB.mdf;Connection Lifetime=120;";
 
         public static void CreateAccount(string fName, string lName, string email, string password, bool isAdministrator, string address, long phone)
         {
@@ -118,7 +118,7 @@ namespace BlazorBookStore1
                         string fName = reader.GetString(reader.GetOrdinal("fName"));
                         string lName = reader.GetString(reader.GetOrdinal("lName"));
                         string email = reader.GetString(reader.GetOrdinal("email"));
-                        int phone = reader.GetInt32(reader.GetOrdinal("phone"));
+                        string phone = reader.GetString(reader.GetOrdinal("phone"));
                         string address = reader.GetString(reader.GetOrdinal("address"));
 
                         Customers newCustomer = new Customers(customerID, fName, lName, email, phone, address);
@@ -144,7 +144,7 @@ namespace BlazorBookStore1
                         string fName = reader.GetString(reader.GetOrdinal("fName"));
                         string lName = reader.GetString(reader.GetOrdinal("lName"));
                         string email = reader.GetString(reader.GetOrdinal("email"));
-                        long phone = reader.GetLong(reader.GetOrdinal("phone"));
+                        string phone = reader.GetString(reader.GetOrdinal("phone"));
                         string address = reader.GetString(reader.GetOrdinal("address"));
 
                         customer = new Customers(customerID, fName, lName, email, phone, address);
@@ -307,6 +307,33 @@ namespace BlazorBookStore1
             return books;
         }
 
+        public static List<Book> searchBooksByTitle(string searchTerm)
+        {
+            List<Book> books = new List<Book>();
+            string query = $"SELECT * FROM dbo.Books WHERE isbnNum like '%{searchTerm}%' or title like '%{searchTerm}%'";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string isbnNum = reader.GetString(reader.GetOrdinal("isbnNum"));
+                        string title = reader.GetString(reader.GetOrdinal("title"));
+                        string pubDate = reader.GetString(reader.GetOrdinal("pubDate"));
+                        float price = reader.GetFloat(reader.GetOrdinal("price"));
+                        float reviews = reader.GetFloat(reader.GetOrdinal("reviews"));
+                        int supplierID = reader.GetInt32(reader.GetOrdinal("supplierID"));
+
+                        Book newBook = new Book(isbnNum, title, pubDate, price, reviews, supplierID);
+                        books.Add(newBook);
+                    }
+                }
+            }
+            return books;
+        }
+
         public static Book getBook(string isbnNum)
         {
             Book book = null;
@@ -404,14 +431,15 @@ namespace BlazorBookStore1
             return suppliers;
         }
 
-        public static Authors getAuthor(int authorID)
+        public static AuthorDetails getAuthor(int authorID)
         {
-            //create new Authors class with all the properties of Author and AuthorContactDetails
-            Authors author = null;
+            //yolo
+            AuthorDetails author = null;
             string query = $"SELECT * FROM dbo.Author JOIN dbo.AuthorContactDetails ON dbo.Author.authorID=dbo.AuthorContactDetails.authorID WHERE authorID={authorID}";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
+                conn.connection
                 conn.Open();
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
@@ -421,8 +449,11 @@ namespace BlazorBookStore1
                         string lName = reader.GetString(reader.GetOrdinal("lName"));
                         string gender = reader.GetString(reader.GetOrdinal("gender"));
                         string DOB = reader.GetString(reader.GetOrdinal("DOB"));
+                        string address = reader.GetString(reader.GetOrdinal("address"));
+                        string email = reader.GetString(reader.GetOrdinal("email"));
+                        string phone = reader.GetString(reader.GetOrdinal("phone"));
 
-                        author = new Authors(authorID, fName, lName, gender, DOB);
+                        author = new AuthorDetails(authorID, fName, lName, gender, DOB, address, email, phone);
                     }
                 }
             }
