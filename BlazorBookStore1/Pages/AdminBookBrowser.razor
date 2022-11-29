@@ -31,8 +31,11 @@
 	</tbody>
 </table>
 <input type="text" placeholder="Enter ISBN#" @onchange="Eval_ISBN" id="ISBN#" class="form-control form-control-sm" />
-<button class="btn btn-primary">Update Book Details</button>
-
+<a href="/Admineditbook/{@ISBN}">
+	<p class="btn btn-primary">
+		Update Book Details
+	</p>
+</a>
 @code {
 	private string ISBN;
 	private void Eval_ISBN(ChangeEventArgs e)

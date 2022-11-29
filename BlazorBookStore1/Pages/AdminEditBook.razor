@@ -1,4 +1,4 @@
-﻿@page "/Admineditbook/{ISBN:int}"
+﻿@page "/Admineditbook/{ISBN}"
 <h2>Edit Book</h2>
 <table class="table table-striped">
 	<thead>
@@ -28,5 +28,5 @@
 <button class="btn btn-primary">Delete Book</button>
 @code {
 	[Parameter]
-	public int? ISBN { get; set; }
+	public string ISBN { get; set; }
 }

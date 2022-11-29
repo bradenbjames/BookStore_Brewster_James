@@ -14,7 +14,7 @@ namespace BlazorBookStore1
     /// </summary>
     public static class DatabaseInstance
     {
-        private static string connectionString = @"Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\Legen\Source\Repos\BookStore_Brewster_James\BlazorBookStore1\Resources\BookStoreDB.mdf;Connection Lifetime=120;";
+        private static string connectionString = @"Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\brade\Source\Repos\BookStore_Brewster_James\BlazorBookStore1\Resources\BookStoreDB.mdf;Connection Lifetime=120;";
 
         public static void CreateAccount(string fName, string lName, string email, string password, bool isAdministrator, string address, string phone)
         {
