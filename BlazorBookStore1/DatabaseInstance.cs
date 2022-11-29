@@ -313,6 +313,19 @@ namespace BlazorBookStore1
             }
         }
 
+        public static void deleteBook(string isbnNum)
+        {
+            string query = $"DELETE FROM dbo.Books WHERE isbnNum='{isbnNum}'";
+            string query2 = $"DELETE FROM dbo.BookCategories WHERE isbnNum='{isbnNum}'";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                SqlCommand command2 = new SqlCommand(query2, conn);
+                command2.ExecuteNonQuery();
+                command.ExecuteNonQuery();
+            }
+        }
+
         public static List<Author> viewAuthors()
         {
             List<Author> authors = new List<Author>();
