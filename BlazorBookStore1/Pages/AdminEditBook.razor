@@ -1,4 +1,4 @@
-﻿@page "/EditAuthorData/{ISBN:int}"
+﻿@page "/Admineditbook/{ISBN:int}"
 <h2>Edit Book</h2>
 <table class="table">
 	<thead>
@@ -25,6 +25,7 @@
 	</tbody>
 </table>
 <button class="btn btn-primary">Confirm Changes</button>
+<button class="btn btn-primary">Delete Book</button>
 @code {
 	[Parameter]
 	public int? ISBN { get; set; }

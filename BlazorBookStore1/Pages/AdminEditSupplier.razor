@@ -1,4 +1,4 @@
-﻿@page "/Admindeletesupplier"
+﻿@page "/Admineditsupplier/{supplierID:int}"
 <h2>Admin Delete Supplier</h2>
 <table class="table">
 	<thead>
@@ -19,8 +19,9 @@
 		}
 	</tbody>
 </table>
-<button class="btn btn-primary">Confirm Delete</button>
+<input type="text" placeholder="Enter ISBN#" @onchange="a" id="ISBN#" class="form-control form-control-sm" />
+<button class="btn btn-primary">Confirm Changes</button>
 @code {
 	[Parameter]
-	public int? AuthorID { get; set; }
+	public int? supplierID { get; set; }
 }
