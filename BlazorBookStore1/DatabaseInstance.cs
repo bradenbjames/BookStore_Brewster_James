@@ -236,6 +236,20 @@ namespace BlazorBookStore1
                 command.ExecuteNonQuery();
             }
         }
+
+        public static void deleteOrder(int orderID)
+        {
+            string query = $"DELETE FROM dbo.Orders WHERE orderID={orderID}";
+            string query2 = $"DELETE FROM dbo.Order_Item WHERE orderID={orderID}";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                SqlCommand command2 = new SqlCommand(query2, conn);
+                conn.Open();
+                command2.ExecuteNonQuery();
+                command.ExecuteNonQuery();
+            }
+        }
         public static List<Book> viewBooks()
         {
             List<Book> books = new List<Book>();
