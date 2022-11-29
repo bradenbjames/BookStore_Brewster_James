@@ -149,10 +149,10 @@ namespace BlazorBookStore1
             }
             return orders;
         }
-        public static List<Order> viewBooks()
+        public static List<Book> viewBooks()
         {
-            List<Order> orders = new List<Order>();
-            string query = $"SELECT * FROM dbo.Orders";
+            List<Book> books = new List<Book>();
+            string query = $"SELECT * FROM dbo.Books";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
@@ -161,17 +161,19 @@ namespace BlazorBookStore1
                 {
                     while (reader.Read())
                     {
-                        int orderID = reader.GetInt32(reader.GetOrdinal("orderID"));
+                        string isbnNum = reader.GetString(reader.GetOrdinal("orderID"));
                         string orderDate = reader.GetString(reader.GetOrdinal("orderDate"));
                         float orderVal = reader.GetFloat(reader.GetOrdinal("orderVal"));
                         int customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
 
-                        Order newOrder = new Order(orderID, orderDate, orderVal, customerID);
-                        orders.Add(newOrder);
+                        Book newBook = new Book(isbnNum, title, pubDate, price, reviews, supplierID);
+                        books.Add(newBook);
                     }
                 }
             }
-            return orders;
+            return books;
         }
+
+
     }
 }
