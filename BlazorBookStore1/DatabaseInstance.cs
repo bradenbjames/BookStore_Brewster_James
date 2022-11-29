@@ -276,6 +276,32 @@ namespace BlazorBookStore1
             }
             return books;
         }
+        public static List<Book> searchBooks(string searchTerm)
+        {
+            List<Book> books = new List<Book>();
+            string query = $"SELECT * FROM dbo.Books WHERE isbnNum like '%{searchTerm}%' or title like '%{searchTerm}%'";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string isbnNum = reader.GetString(reader.GetOrdinal("isbnNum"));
+                        string title = reader.GetString(reader.GetOrdinal("title"));
+                        string pubDate = reader.GetString(reader.GetOrdinal("pubDate"));
+                        float price = reader.GetFloat(reader.GetOrdinal("price"));
+                        float reviews = reader.GetFloat(reader.GetOrdinal("reviews"));
+                        int supplierID = reader.GetInt32(reader.GetOrdinal("supplierID"));
+
+                        Book newBook = new Book(isbnNum, title, pubDate, price, reviews, supplierID);
+                        books.Add(newBook);
+                    }
+                }
+            }
+            return books;
+        }
 
         public static Book getBook(string isbnNum)
         {
