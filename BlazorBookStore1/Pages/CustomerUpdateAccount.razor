@@ -1,0 +1,129 @@
+﻿@page "/Customerupdateaccount"
+<h3>Update My Account</h3>
+<section class="vh-100 gradient-custom">
+	<div class="container py-5 h-100">
+		<div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+				<div class="card bg-dark text-white" style="border-radius: 1rem;">
+					<div class="card-body p-5 text-center">
+
+						<div class="mb-md-5 mt-md-4 pb-5">
+
+							<h2 class="fw-bold mb-2">Create Account</h2>
+							<p class="text-white-50 mb-5"></p>
+
+							<div class="form-outline form-white mb-4">
+								<input type="text" id="firstName" class="form-control form-control-lg" @onchange="Eval_fName" />
+								<label class="form-label" for="firstName">First Name:</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="text" id="lastName" class="form-control form-control-lg" @onchange="Eval_lName" />
+								<label class="form-label" for="lastName">Last Name</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="text" id="addressOne" class="form-control form-control-lg" @onchange="Eval_address" />
+								<label class="form-label" for="addressOne">Address Line 1</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="text" id="addressTwo" class="form-control form-control-lg" />
+								<label class="form-label" for="addressTwo">Address Line 2</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="text" id="city" class="form-control form-control-lg" />
+								<label class="form-label" for="city">City</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="text" id="zipCode" class="form-control form-control-lg" />
+								<label class="form-label" for="zipCode">ZipCode</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="text" id="state" class="form-control form-control-lg" />
+								<label class="form-label" for="state">State</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="text" id="phoneNum" class="form-control form-control-lg" @onchange="Eval_phone" />
+								<label class="form-label" for="phoneNum">Phone Number</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="email" id="typeEmailX" class="form-control form-control-lg" @onchange="Eval_email" />
+								<label class="form-label" for="typeEmailX">Email</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="password" id="password" class="form-control form-control-lg" @onchange="Eval_password" />
+								<label class="form-label" for="password">Password</label>
+							</div>
+
+							<div class="form-outline form-white mb-4">
+								<input type="checkbox" id="adminCheckbox" @onchange="Eval_admin" />
+								<label class="form-label" for="adminCheckbox">Administrator?:</label>
+							</div>
+
+							<p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+
+							<!-- Change this -->
+							<button class="btn btn-outline-light btn-lg px-5" @onclick="()=>DatabaseInstance.CreateAccount(fNameString, lNameString, emailString, passwordString, isAdmin, addressString, phone)" type="submit">Save Changes</button>
+
+							<div class="d-flex justify-content-center text-center mt-4 pt-1">
+								<a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+								<a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
+								<a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+@code {
+	private string fNameString { get; set; }
+	private void Eval_fName(ChangeEventArgs x)
+	{
+		fNameString = (string)x.Value;
+	}
+
+	private string lNameString { get; set; }
+	private void Eval_lName(ChangeEventArgs x)
+	{
+		lNameString = (string)x.Value;
+	}
+
+	private string emailString { get; set; }
+	private void Eval_email(ChangeEventArgs x)
+	{
+		emailString = (string)x.Value;
+	}
+
+	private string passwordString { get; set; }
+	private void Eval_password(ChangeEventArgs x)
+	{
+		passwordString = (string)x.Value;
+	}
+
+	private bool isAdmin { get; set; }
+	private void Eval_admin(ChangeEventArgs x)
+	{
+		isAdmin = (bool)x.Value;
+	}
+
+	private string addressString { get; set; }
+	private void Eval_address(ChangeEventArgs x)
+	{
+		addressString = (string)x.Value;
+	}
+
+	private long phone { get; set; }
+	private void Eval_phone(ChangeEventArgs x)
+	{
+		phone = long.Parse((string)x.Value);
+	}
+}
