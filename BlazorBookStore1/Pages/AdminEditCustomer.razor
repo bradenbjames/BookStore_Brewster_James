@@ -5,7 +5,7 @@
 	<button>Search</button>
 </div>
 
-<table class="thead-dark">
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th scope="col">First Name</th>
@@ -13,19 +13,24 @@
 		</tr>
 	</thead>
 	<tbody>
-		@if (customerID.HasValue)
+		@if (this.customerID.HasValue)
 		{
 			CustomerDetails cd = DatabaseInstance.getCustomer(this.customerID.Value);
 			<tr>
-				<td><input value=@cd.fName type="text"></td>
-				<td><input value=@cd.lName type="text"></td>
+				<td><input @onchange="Eval_fName" value=@cd.fName type="text"></td>
+				<td><input @onchange="Eval_lName" value=@cd.lName type="text"></td>
+				<td><input @onchange="Eval_email" value=@cd.email type="text"></td>
+				<td><input @onchange="Eval_address" value=@cd.address type="text"></td>
+				<td><input @onchange="Eval_phone" value=@cd.phone type="text"></td>
+				<td><input @onchange="Eval_password" value=@cd.password type="text"></td>
+
 			</tr>
 		}
 	</tbody>
 </table>
 <input type="text" placeholder="Edit First Name">
 <input type="text" placeholder="Edit Last Name">
-<button class="btn btn-primary">Confirm Changes</button>
+<button class="btn btn-primary" @onclick="()=>DatabaseInstance.UpdateAccount(customerID.Value, fName, lName, address, email, phone, password)">Confirm Changes</button>
 <button class="btn btn-primary">Delete Customer</button>
 
 
@@ -33,4 +38,43 @@
 @code {
 	[Parameter]
 	public int? customerID { get; set; }
+
+	private string fName;
+	private void Eval_fName(ChangeEventArgs e)
+	{
+		fName = (string)e.Value;
+	}
+	
+	private string lName;
+	private void Eval_lName(ChangeEventArgs e)
+	{
+		lName = (string)e.Value;
+	}
+
+	private string email;
+	private void Eval_email(ChangeEventArgs e)
+	{
+		email = (string)e.Value;
+	}
+
+	private string address;
+	private void Eval_address(ChangeEventArgs e)
+	{
+		address = (string)e.Value;
+	}
+
+	private string phone;
+	private void Eval_phone(ChangeEventArgs e)
+	{
+		phone = (string)e.Value;
+	}
+
+	private string password;
+	private void Eval_password(ChangeEventArgs e)
+	{
+		password = (string)e.Value;
+	}
+
+
+
 }

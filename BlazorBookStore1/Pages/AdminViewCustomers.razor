@@ -1,11 +1,12 @@
 ﻿@page "/Adminviewcustomers"
+@inject NavigationManager UriHelper
 <div>
 	<h3>Customer Details</h3>
 	<input type="search" id="query" name="q" placeholder="Search...">
 	<button>Search</button>
 </div>
 
-<table class="thead-dark">
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th scope="col">Customer ID</th>
@@ -25,7 +26,11 @@
 	</tbody>
 </table>
 <input type="text" @onchange="Eval_CustomerID" placeholder="Enter customerID">
-<button class="btn btn-primary">Edit Customer</button>
+<a @onclick="goToEditCustomer">
+	<p class="btn btn-primary">
+		Edit Customer
+	</p>
+</a>
 
 
 @code {
@@ -34,4 +39,15 @@
 	{
 		customerID = Int32.Parse((string)e.Value);
 	}
+
+	private void goToEditCustomer()
+	{
+		try
+		{
+			UriHelper.NavigateTo("Admineditcustomer");
+		}
+		catch (Exception e) { }
+
+	}
+
 }
