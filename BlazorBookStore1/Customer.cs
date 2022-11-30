@@ -13,7 +13,7 @@ namespace BlazorBookStore1
         public static string lName { get; set; }
         public static string password { get; set; }
         public static string email { get; set; }
-        public static int phone { get; set; }   
+        public static string phone { get; set; }   
         public static string address { get; set; }
         public static bool isAdministrator { get; set; } = false;
     }

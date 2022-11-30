@@ -14,7 +14,7 @@ namespace BlazorBookStore1
     /// </summary>
     public static class DatabaseInstance
     {
-        private static string connectionString = @"Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\brade\Source\Repos\BookStore_Brewster_James\BlazorBookStore1\Resources\BookStoreDB.mdf;Connection Lifetime=120;";
+        private static string connectionString = @"Server=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDbFileName=C:\Users\brade\Source\Repos\BookStore_Brewster_James\BlazorBookStore1\Resources\BookStoreDB.mdf;Connection Lifetime=120;MultipleActiveResultSets=true;";
 
         public static void CreateAccount(string fName, string lName, string email, string password, bool isAdministrator, string address, string phone)
         {
@@ -91,7 +91,7 @@ namespace BlazorBookStore1
                     while (reader.Read())
                     {
                         Customer.address = reader.GetString(reader.GetOrdinal("address"));
-                        Customer.phone = reader.GetInt32(reader.GetOrdinal("phone"));
+                        Customer.phone = reader.GetString(reader.GetOrdinal("phone"));
                     }
                 }
             }
@@ -112,6 +112,13 @@ namespace BlazorBookStore1
                 command2.ExecuteNonQuery();
                 command3.ExecuteNonQuery();
             }
+            Customer.customerID = customerID;
+            Customer.fName = fName;
+            Customer.lName = lName;
+            Customer.address = address;
+            Customer.email = email;
+            Customer.phone = phone;
+            Customer.password = password;
         }
 
         public static void Logout()
@@ -149,7 +156,7 @@ namespace BlazorBookStore1
         public static CustomerDetails getCustomer(int customerID)
         {
             CustomerDetails customer = null;
-            string query = $"SELECT * FROM dbo.Customer JOIN dbo.CustomerContactDetails ON dbo.Customer.customerID = dbo.CustomerContactDetails.customerID WHERE customerID={customerID}";
+            string query = $"SELECT * FROM dbo.Customer JOIN dbo.CustomerContactDetails ON dbo.Customer.customerID = dbo.CustomerContactDetails.customerID JOIN dbo.Login ON dbo.CustomerContactDetails.customerID = dbo.Login.customerID WHERE customerID={customerID}";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(query, conn);
