@@ -26,11 +26,7 @@
 	</tbody>
 </table>
 <input type="text" @onchange="Eval_CustomerID" placeholder="Enter customerID">
-<a @onclick="goToEditCustomer">
-	<p class="btn btn-primary">
-		Edit Customer
-	</p>
-</a>
+<button class="btn btn-primary" @="/Admineditcustomer">Edit Customer</button>
 
 
 @code {
@@ -46,7 +42,10 @@
 		{
 			UriHelper.NavigateTo("Admineditcustomer");
 		}
-		catch (Exception e) { }
+		catch (Exception e)
+		{
+			Console.WriteLine(e.ToString());	
+		}
 
 	}
 
