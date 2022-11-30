@@ -8,6 +8,7 @@
 <table class="thead-dark">
 	<thead>
 		<tr>
+			<th scope="col">SupplierID</th>
 			<th scope="col">Supplier Name</th>
 		</tr>
 	</thead>
@@ -15,6 +16,7 @@
 		@foreach(Supplier s in DatabaseInstance.viewSuppliers())
 		{
 			<tr>
+				<td>@s.supplierID</td>
 				<td>@s.name</td>
 			</tr>
 		}
