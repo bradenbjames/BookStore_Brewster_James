@@ -52,7 +52,10 @@
             DatabaseInstance.Login(emailString, passwordString);
             UriHelper.NavigateTo("profile");
         }
-        catch (Exception e) { }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
     }
 
     private string emailString { get; set; }
