@@ -8,7 +8,7 @@ namespace BlazorBookStore1
 {
     public class CustomerDetails
     {
-        private string password;
+        public string password { get; set; }
 
         public int customerID { get; set; }
         public string fName { get; set; }

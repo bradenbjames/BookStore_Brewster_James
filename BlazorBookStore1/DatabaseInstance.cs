@@ -51,6 +51,8 @@ namespace BlazorBookStore1
 
         public static void Login(string email, string password)
         {
+            Customer customer = new Customer();
+
             int customerID = -1;
             string query = $"SELECT * FROM dbo.Login WHERE email='{email}' AND password='{password}'";
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -62,14 +64,14 @@ namespace BlazorBookStore1
                     {
                         while (reader.Read())
                         {
-                            Customer.customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
-                            Customer.email = reader.GetString(reader.GetOrdinal("email"));
-                            Customer.password = reader.GetString(reader.GetOrdinal("password"));
+                            customer.customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                            customer.email = reader.GetString(reader.GetOrdinal("email"));
+                            customer.password = reader.GetString(reader.GetOrdinal("password"));
                             int isAdministrator = reader.GetInt32(reader.GetOrdinal("isAdministrator"));
                             if (isAdministrator == 1)
-                                Customer.isAdministrator = true;
+                                customer.isAdministrator = true;
                             else
-                                Customer.isAdministrator = false;
+                                customer.isAdministrator = false;
                             break;
                         }
                     }
@@ -82,8 +84,8 @@ namespace BlazorBookStore1
                     {
                         while (reader.Read())
                         {
-                            Customer.fName = reader.GetString(reader.GetOrdinal("fName"));
-                            Customer.lName = reader.GetString(reader.GetOrdinal("lName"));
+                            customer.fName = reader.GetString(reader.GetOrdinal("fName"));
+                            customer.lName = reader.GetString(reader.GetOrdinal("lName"));
                             break;
                         }
                     }
@@ -97,8 +99,8 @@ namespace BlazorBookStore1
                     {
                         while (reader.Read())
                         {
-                            Customer.address = reader.GetString(reader.GetOrdinal("address"));
-                            Customer.phone = reader.GetString(reader.GetOrdinal("phone"));
+                            customer.address = reader.GetString(reader.GetOrdinal("address"));
+                            customer.phone = reader.GetString(reader.GetOrdinal("phone"));
                         }
                     }
                 }
@@ -107,6 +109,7 @@ namespace BlazorBookStore1
 
         public static void UpdateAccount(int customerID, string fName, string lName, string address, string email, string phone, string password)
         {
+            Customer customer = new Customer();
             string query = $"UPDATE dbo.Customer SET fName='{fName}', lName='{lName}' WHERE customerID={customerID}";
             string query2 = $"UPDATE dbo.CustomerContactDetails SET address='{address}', email='{email}', phone='{phone}' WHERE customerID={customerID}";
             string query3 = $"UPDATE dbo.Login SET email='{email}', password='{password}' WHERE customerID={customerID}";
@@ -120,18 +123,19 @@ namespace BlazorBookStore1
                 command2.ExecuteNonQuery();
                 command3.ExecuteNonQuery();
             }
-            Customer.customerID = customerID;
-            Customer.fName = fName;
-            Customer.lName = lName;
-            Customer.address = address;
-            Customer.email = email;
-            Customer.phone = phone;
-            Customer.password = password;
+            customer.customerID = customerID;
+            customer.fName = fName;
+            customer.lName = lName;
+            customer.address = address;
+            customer.email = email;
+            customer.phone = phone;
+            customer.password = password;
         }
 
         public static void Logout()
         {
-            Customer.customerID = -1;
+            Customer customer = new Customer();
+            customer.customerID = -1;
         }
 
         public static List<CustomerDetails> viewCustomers()

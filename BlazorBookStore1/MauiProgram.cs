@@ -21,6 +21,7 @@ public static class MauiProgram
 #endif
 		
 		builder.Services.AddSingleton<WeatherForecastService>();
+		builder.Services.AddScoped<Customer>();
 
 		return builder.Build();
 	}
