@@ -7,11 +7,11 @@
 		</tr>
 	</thead>
 	<tbody>
-
-		@foreach (Supplier s in DatabaseInstance.viewSuppliers())
+		@if (supplierID.HasValue)
 		{
+			Supplier s = DatabaseInstance.getSupplier(supplierID.Value);
 			<tr>
-				<td>@s.name</td>
+				<td><input class="text">@s.name</td>
 			</tr>
 		}
 	</tbody>

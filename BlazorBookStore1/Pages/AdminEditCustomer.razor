@@ -13,11 +13,12 @@
 		</tr>
 	</thead>
 	<tbody>
-		@foreach(CustomerDetails c in DatabaseInstance.viewCustomers())
+		@if (customerID.HasValue)
 		{
+			CustomerDetails cd = DatabaseInstance.getCustomer(this.customerID.Value);
 			<tr>
-				<td><input value=@c.fName type="text"></td>
-				<td><input value=@c.lName type="text"></td>
+				<td><input value=@cd.fName type="text"></td>
+				<td><input value=@cd.lName type="text"></td>
 			</tr>
 		}
 	</tbody>

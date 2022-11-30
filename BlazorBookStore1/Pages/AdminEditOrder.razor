@@ -9,17 +9,19 @@
 		</tr>
 	</thead>
 	<tbody>
-
-		@foreach (Order o in DatabaseInstance.viewOrders())
+		@if (orderID.HasValue)
 		{
+			Order o = DatabaseInstance.getOrder(orderID.Value);
 			<tr>
 				<td> <input value=@o.orderDate type="text"></td>
 				<td> <input value=@o.orderVal type="text"></td>
 				<td> <input value=@o.customerID type="text"></td>
 			</tr>
+
 		}
 	</tbody>
 </table>
+<button class="btn btn-primary">Delete Order</button>
 <button class="btn btn-primary">Confirm Changes</button>
 @code {
 	[Parameter]

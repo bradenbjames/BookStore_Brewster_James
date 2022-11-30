@@ -7,22 +7,26 @@
 			<th scope="col">Last Name</th>
 			<th scope="col">Gender</th>
 			<th scope="col">DOB</th>
+			<th scope="col">Address</th>
+			<th scope="col">Email</th>
+			<th scope="col">Phone</th>
 		</tr>
 	</thead>
 	<tbody>
-
-		@foreach (Author a in DatabaseInstance.viewAuthors())
+		@if (AuthorID.HasValue)
 		{
-			if (a.authorID == AuthorID)
-			{
-				<tr>
-					<td> <input value=@a.fName type="text"></td>
-					<td> <input value=@a.lName type="text"></td>
-					<td> <input value=@a.gender type="text"></td>
-					<td> <input value=@a.DOB type="text"></td>
-				</tr>
-			}
+			AuthorDetails a = DatabaseInstance.getAuthor(this.AuthorID.Value);
+			<tr>
+				<td> <input value=@a.FName type="text"></td>
+				<td> <input value=@a.LName type="text"></td>
+				<td> <input value=@a.Gender type="text"></td>
+				<td> <input value=@a.DOB type="text"></td>
+				<td> <input value=@a.Address type="text"></td>
+				<td> <input value=@a.Email type="text"></td>
+				<td> <input value=@a.Phone type="text"></td>
+			</tr>
 		}
+
 	</tbody>
 </table>
 <button class="btn btn-primary">Confirm Changes</button>

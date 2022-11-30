@@ -11,9 +11,9 @@
 		</tr>
 	</thead>
 	<tbody>
-
-		@foreach (Book b in DatabaseInstance.viewBooks())
+		@if (!ISBN.Equals(string.Empty))
 		{
+			Book b = DatabaseInstance.getBook(this.ISBN);
 			<tr>
 				<td> <input value=@b.title type="text"></td>
 				<td> <input value=@b.pubDate type="text"></td>

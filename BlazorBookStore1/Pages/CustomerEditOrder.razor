@@ -8,9 +8,9 @@
 		</tr>
 	</thead>
 	<tbody>
-
-		@foreach (Order o in DatabaseInstance.viewOrders())
+		@if (orderID.HasValue)
 		{
+			Order o = DatabaseInstance.getOrder(this.orderID.Value);
 			<tr>
 				<td> <input value=@o.orderDate type="text"></td>
 				<td> <input value=@o.orderVal type="text"></td>
