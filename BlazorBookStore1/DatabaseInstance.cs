@@ -27,8 +27,8 @@ namespace BlazorBookStore1
             int customerID = 0;
             using(SqlConnection conn = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(query, conn);
                 conn.Open();
+                SqlCommand command = new SqlCommand(query, conn);
                 command.ExecuteNonQuery();
 
                 query = $"SELECT * FROM dbo.Customer WHERE fName='{fName}' AND lName='{lName}'";
@@ -56,42 +56,50 @@ namespace BlazorBookStore1
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                SqlCommand command = new SqlCommand(query, conn);
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    while (reader.Read())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        Customer.customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
-                        Customer.email = reader.GetString(reader.GetOrdinal("email"));
-                        Customer.password = reader.GetString(reader.GetOrdinal("password"));
-                        int isAdministrator = reader.GetInt32(reader.GetOrdinal("isAdministrator"));
-                        if (isAdministrator == 1)
-                            Customer.isAdministrator = true;
-                        else
-                            Customer.isAdministrator = false;
-                        break;
+                        while (reader.Read())
+                        {
+                            Customer.customerID = reader.GetInt32(reader.GetOrdinal("customerID"));
+                            Customer.email = reader.GetString(reader.GetOrdinal("email"));
+                            Customer.password = reader.GetString(reader.GetOrdinal("password"));
+                            int isAdministrator = reader.GetInt32(reader.GetOrdinal("isAdministrator"));
+                            if (isAdministrator == 1)
+                                Customer.isAdministrator = true;
+                            else
+                                Customer.isAdministrator = false;
+                            break;
+                        }
                     }
                 }
+                
                 query = $"SELECT * FROM dbo.Customer WHERE customerID={customerID}";
-                command = new SqlCommand(query, conn);
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    while (reader.Read())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        Customer.fName = reader.GetString(reader.GetOrdinal("fName"));
-                        Customer.lName = reader.GetString(reader.GetOrdinal("lName"));
-                        break;
+                        while (reader.Read())
+                        {
+                            Customer.fName = reader.GetString(reader.GetOrdinal("fName"));
+                            Customer.lName = reader.GetString(reader.GetOrdinal("lName"));
+                            break;
+                        }
                     }
                 }
+               
 
                 query = $"SELECT * FROM dbo.CustomerContactDetails WHERE customerID={customerID}";
-                command = new SqlCommand(query, conn);
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    while (reader.Read())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        Customer.address = reader.GetString(reader.GetOrdinal("address"));
-                        Customer.phone = reader.GetString(reader.GetOrdinal("phone"));
+                        while (reader.Read())
+                        {
+                            Customer.address = reader.GetString(reader.GetOrdinal("address"));
+                            Customer.phone = reader.GetString(reader.GetOrdinal("phone"));
+                        }
                     }
                 }
             }
@@ -132,8 +140,8 @@ namespace BlazorBookStore1
             string query = $"SELECT * FROM dbo.Customer JOIN dbo.CustomerContactDetails ON dbo.Customer.customerID = dbo.CustomerContactDetails.customerID";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(query, conn);
                 conn.Open();
+                SqlCommand command = new SqlCommand(query, conn);
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -284,21 +292,23 @@ namespace BlazorBookStore1
             string query = $"SELECT * FROM dbo.Books";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(query, conn);
                 conn.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqlCommand command = new SqlCommand(query, conn))
                 {
-                    while (reader.Read())
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        string isbnNum = reader.GetString(reader.GetOrdinal("isbnNum"));
-                        string title = reader.GetString(reader.GetOrdinal("title"));
-                        string pubDate = reader.GetString(reader.GetOrdinal("pubDate"));
-                        float price = reader.GetFloat(reader.GetOrdinal("price"));
-                        float reviews = reader.GetFloat(reader.GetOrdinal("reviews"));
-                        int supplierID = reader.GetInt32(reader.GetOrdinal("supplierID"));
+                        while (reader.Read())
+                        {
+                            string isbnNum = reader.GetString(reader.GetOrdinal("isbnNum"));
+                            string title = reader.GetString(reader.GetOrdinal("title"));
+                            string pubDate = reader.GetString(reader.GetOrdinal("pubDate"));
+                            float price = reader.GetFloat(reader.GetOrdinal("price"));
+                            float reviews = reader.GetFloat(reader.GetOrdinal("reviews"));
+                            int supplierID = reader.GetInt32(reader.GetOrdinal("supplierID"));
 
-                        Book newBook = new Book(isbnNum, title, pubDate, price, reviews, supplierID);
-                        books.Add(newBook);
+                            Book newBook = new Book(isbnNum, title, pubDate, price, reviews, supplierID);
+                            books.Add(newBook);
+                        }
                     }
                 }
             }
