@@ -5,19 +5,21 @@
 	<button>Search</button>
 </div>
 
-<table class="table table-striped">
+<table class="thead-dark">
 	<thead>
 		<tr>
+			<th scope="col">SupplierID</th>
 			<th scope="col">Supplier Name</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td></td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
+		@foreach(Supplier s in DatabaseInstance.viewSuppliers())
+		{
+			<tr>
+				<td>@s.supplierID</td>
+				<td>@s.name</td>
+			</tr>
+		}
 	</tbody>
 </table>
 <input type="text" @onchange="Eval_supplierID" placeholder="Enter supplier ID"/>
