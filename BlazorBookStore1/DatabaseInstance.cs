@@ -178,8 +178,9 @@ namespace BlazorBookStore1
                         string email = reader.GetString(reader.GetOrdinal("email"));
                         string phone = reader.GetString(reader.GetOrdinal("phone"));
                         string address = reader.GetString(reader.GetOrdinal("address"));
+                        string password = reader.GetString(reader.GetOrdinal("password"));
 
-                        customer = new CustomerDetails(customerID, fName, lName, email, phone, address);
+                        customer = new CustomerDetails(customerID, fName, lName, email, phone, address, password);
                     }
                 }
             }
